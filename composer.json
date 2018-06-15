@@ -1,0 +1,20 @@
+{
+    "name": "buer/asset",
+    "description": "Finance packagist",
+    "type": "library",
+    "authors": [
+        {
+            "name": "buer",
+            "email": "buer2202@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "laravel/framework": ">=5.2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
