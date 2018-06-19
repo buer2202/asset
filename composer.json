@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "buer\\asset\\": "src/"
+            "Buer\\Asset\\": "src/"
         }
     }
 }
