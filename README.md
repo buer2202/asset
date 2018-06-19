@@ -8,7 +8,7 @@ Laravel >= 5.1
 
 ## 安装
 
-composer require buer/excel
+composer require buer/asset
 
 ## 配置
 
