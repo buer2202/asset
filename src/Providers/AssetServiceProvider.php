@@ -3,8 +3,8 @@
 namespace Buer\Asset\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Buer\Asset\Commands\DailySettlementPlatformAsset;
-use Buer\Asset\Commands\DailySettlementUserAsset;
+use Buer\Asset\Console\DailySettlementPlatformAsset;
+use Buer\Asset\Console\DailySettlementUserAsset;
 use Buer\Asset\Asset;
 
 // 资金

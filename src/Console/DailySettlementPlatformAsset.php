@@ -1,6 +1,6 @@
 <?php
 
-namespace Buer\Asset\Commands;
+namespace Buer\Asset\Console;
 
 use Illuminate\Console\Command;
 use Exception;
