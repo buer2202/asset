@@ -27,6 +27,20 @@ composer require buer/asset
 php artisan migrate
 ```
 
+laravel5.4迁移时因编码问题会抛异常索引key过长
+解决问题，2个办法：
+1.升级MySql版本到5.5.3以上。
+2.手动配置迁移命令migrate生成的默认字符串长度，在AppServiceProvider中调用Schema::defaultStringLength方法来实现配置：
+
+```
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+   Schema::defaultStringLength(191);
+}
+```
+
 ## 拷贝配置文件
 ```
 php artisan vendor:publish
@@ -57,7 +71,7 @@ Asset::income('金额', 8, '订单号', '备注', '用户ID', '管理员ID', '�
 php artisan daily-settlement:user-asset
 php artisan daily-settlement:platform-asset
 ```
-若漏掉，可以使用日期参数补做:
+若漏做，可以使用日期参数补做:
 ```
 php artisan daily-settlement:user-asset 20180620
 php artisan daily-settlement:platform-asset 20180620
