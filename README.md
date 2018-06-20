@@ -45,7 +45,10 @@ public function boot()
 ```
 php artisan vendor:publish
 ```
+若成功，则会生成文件config/asset.php, 其中：
+
 type代表交易类型，禁止修改。
+
 sub_type是子类型，可以自定义。
 
 ## 程序调用
