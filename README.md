@@ -27,9 +27,7 @@ composer require buer/asset
 php artisan migrate
 ```
 
-laravel5.4迁移时因编码问题会抛异常索引key过长
-
-解决问题，2个办法：
+laravel5.4迁移时因编码问题会抛异常索引key过长。解决问题，2个办法：
 
 1.升级MySql版本到5.5.3以上。
 
