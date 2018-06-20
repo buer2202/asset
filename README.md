@@ -28,8 +28,11 @@ php artisan migrate
 ```
 
 laravel5.4迁移时因编码问题会抛异常索引key过长
+
 解决问题，2个办法：
+
 1.升级MySql版本到5.5.3以上。
+
 2.手动配置迁移命令migrate生成的默认字符串长度，在AppServiceProvider中调用Schema::defaultStringLength方法来实现配置：
 
 ```
