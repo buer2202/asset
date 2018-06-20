@@ -45,6 +45,7 @@ public function boot()
 ```
 php artisan vendor:publish
 ```
+配置文件中的type代表交易类型，若按本文档指定则无需修改，sub_type是子类型，可以自定义。
 
 ## 程序调用
 使用Asset门面
