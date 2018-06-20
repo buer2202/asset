@@ -10,7 +10,7 @@ composer require buer/asset
 ```
 
 ## 配置
-1.在 config/app.php 注册 ServiceProvider 和 Facade (Laravel 5.5 无需手动注册)
+1.在 config/app.php 注册 ServiceProvider 和 Facade
 ```
 'providers' => [
     // ...
