@@ -2,6 +2,7 @@
 namespace Buer\Asset\Methods;
 
 use Buer\Asset\Exceptions\AssetException;
+use Buer\Asset\Models\ProcessOrder;
 
 // 交易收入（资金内部流动）
 class Income extends TradeBase
@@ -12,6 +13,23 @@ class Income extends TradeBase
 
         // 指定交易类型
         $this->type = self::TRADE_TYPE_INCOME;
+
+        // 维护处理中的订单表
+        $processOrder = ProcessOrder::where('order_no', $this->tradeNo)->lockForUpdate()->first();
+        if (empty($processOrder)) {
+            throw new CustomException('不存在该处理中的订单');
+        }
+
+        $processOrder->amount = bcadd($processOrder->amount, $this->fee);
+        if ($processOrder->amount > 0) {
+            throw new AssetException('订单额度不足');
+        } elseif ($processOrder->amount == 0) {
+            $processOrder->delete(); // 删掉
+        } else {
+            if (!$processOrder->save()) {
+                throw new AssetException('维护处理中的订单失败');
+            }
+        }
     }
 
     // 更新用户余额
