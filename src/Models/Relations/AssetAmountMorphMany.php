@@ -1,5 +1,5 @@
 <?php
-namespace Buer\Asset\Models\Trait;
+namespace Buer\Asset\Models\Relations;
 
 use Buer\Asset\Models\UserAmountFlow;
 use Buer\Asset\Models\PlatformAmountFlow;

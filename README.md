@@ -72,7 +72,7 @@ Asset::income('金额', 子类型, '订单号', '备注', '用户ID', '管理员
 ```
 传关联模型对象参数时，需要在模型中使用此trait
 ```
-use Buer\Asset\Models\Trait\AssetAmountMorphMany;
+use Buer\Asset\Models\Relations\AssetAmountMorphMany;
 
 class YourModel extends Model
 {
