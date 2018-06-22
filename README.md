@@ -14,11 +14,11 @@ composer require buer/asset
 ```
 'providers' => [
     // ...
-    Buer\Asset\Providers\AssetServiceProvider::class,
+    Buer\Asset\AssetServiceProvider::class,
 ],
 'aliases' => [
     // ...
-    'Asset' => Buer\Asset\Facades\Asset::class,
+    'Asset' => Buer\Asset\AssetFacade::class,
 ],
 ```
 
