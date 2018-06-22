@@ -70,7 +70,15 @@ Asset::expend('金额', 子类型, '订单号', '备注', '用户ID', '管理员
 Asset::expend('金额', 子类型, '订单号', '备注', '用户ID', '管理员ID', '关联模型对象', 'frozen'); // 从冻结支出
 Asset::income('金额', 子类型, '订单号', '备注', '用户ID', '管理员ID', '关联模型对象'); // 收入
 ```
+传关联模型对象参数时，需要在模型中使用此trait
+```
+use Buer\Asset\Models\Trait\AssetAmountMorphMany;
 
+class YourModel extends Model
+{
+    use AssetAmountMorphMany;
+}
+```
 ## 日结
 每天需要执行一次日结命令，执行时间不限，默认结算前一天的数据:
 ```
