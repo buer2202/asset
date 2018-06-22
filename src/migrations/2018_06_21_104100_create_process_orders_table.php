@@ -19,7 +19,7 @@ class CreateProcessOrdersTable extends Migration
             $table->string('order_no', 30)->comment('订单号');
             $table->decimal('amount', 11, 4)->comment('金额');
             $table->unsignedInteger('user_id')->comment('用户id');
-            $table->string('orderable_type')->default('')->comment('多态关联模型名');
+            $table->string('orderable_type', 150)->default('')->comment('多态关联模型名');
             $table->unsignedInteger('orderable_id')->default(0)->comment('多态关联对象id');
             $table->timestamps();
 

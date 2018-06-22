@@ -33,7 +33,7 @@ class CreatePlatformAmountFlowsTable extends Migration
             $table->unsignedInteger('total_trade_quantity')->comment('累计用户成交次数');
             $table->decimal('total_trade_amount', 17, 4)->comment('累计用户成交金额');
             $table->dateTime('created_at');
-            $table->string('flowable_type')->default('')->comment('多态关联模型名');
+            $table->string('flowable_type', 150)->default('')->comment('多态关联模型名');
             $table->unsignedInteger('flowable_id')->default(0)->comment('多态关联对象id');
 
             $table->index('user_id');

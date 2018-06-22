@@ -31,7 +31,7 @@ class CreateUserAmountFlowsTable extends Migration
             $table->decimal('total_expend', 17, 4)->comment('累计交易支出');
             $table->decimal('total_income', 17, 4)->comment('累计交易收入');
             $table->dateTime('created_at');
-            $table->string('flowable_type')->default('')->comment('多态关联模型名');
+            $table->string('flowable_type', 150)->default('')->comment('多态关联模型名');
             $table->unsignedInteger('flowable_id')->default(0)->comment('多态关联对象id');
 
             $table->index('user_id');
