@@ -1,10 +1,10 @@
 <?php
 
-namespace Buer\Asset\Facades;
+namespace Buer\Asset;
 
 use Illuminate\Support\Facades\Facade;
 
-class Asset extends Facade
+class AssetFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {

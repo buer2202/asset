@@ -16,5 +16,15 @@
         "psr-4": {
             "Buer\\Asset\\": "src/"
         }
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Buer\\Asset\\AssetServiceProvider"
+            ],
+            "aliases": {
+                "Asset": "Buer\\Asset\\AssetFacade"
+            }
+        }
+    },
 }
