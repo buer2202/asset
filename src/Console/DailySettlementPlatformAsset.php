@@ -55,7 +55,7 @@ class DailySettlementPlatformAsset extends Command
         try {
             $this->repository->generateDaily($dailyDate);
         }
-        catch (CustomException $e) {
+        catch (Exception $e) {
             Log::warning('平台资产日结：' . $e->getMessage());
         }
     }

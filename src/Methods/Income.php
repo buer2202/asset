@@ -17,7 +17,7 @@ class Income extends TradeBase
         // 维护处理中的订单表
         $processOrder = ProcessOrder::where('order_no', $this->tradeNo)->lockForUpdate()->first();
         if (empty($processOrder)) {
-            throw new CustomException('不存在该处理中的订单');
+            throw new AssetException('不存在该处理中的订单');
         }
 
         $processOrder->amount = bcadd($processOrder->amount, $this->fee);
