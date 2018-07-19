@@ -3,7 +3,7 @@ namespace Buer\Asset\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Buer\Asset\Models\User;
+use Buer\Asset\Models\UserAsset;
 use Buer\Asset\Models\UserAmountFlow;
 use Buer\Asset\Models\UserAssetDaily;
 
@@ -16,8 +16,8 @@ class UserAssetDailyRepository
     {
         $return = true;
 
-        foreach (User::all() as $user) {
-            $result = $this->generateUserDaily($date, $user->id);
+        foreach (UserAsset::all() as $user) {
+            $result = $this->generateUserDaily($date, $user->user_id);
             if (!$result) {
                 $return = false;
             }
