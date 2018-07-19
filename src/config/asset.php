@@ -1,5 +1,8 @@
 <?php
 return [
+    // 异常类，可自定义
+    'exception_class' => \Buer\Asset\Exceptions\AssetException::class,
+
     // 交易类型，数字不能改
     'type' => [
         1 => '加款',
@@ -23,7 +26,4 @@ return [
         71 => '支出',
         81 => '收入',
     ],
-
-    // 异常类，可自定义
-    'exception_class' => \Buer\Asset\Exceptions\AssetException::class,
 ];
