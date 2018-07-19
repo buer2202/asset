@@ -8,7 +8,6 @@ use Buer\Asset\Models\UserAmountFlow;
 use Buer\Asset\Models\PlatformAmountFlow;
 use Buer\Asset\Models\PlatformAsset;
 use Buer\Asset\Models\UserAsset;
-use Buer\Asset\Models\User;
 
 // 交易基类
 abstract class TradeBase
@@ -71,12 +70,6 @@ abstract class TradeBase
         $this->expendFrom  = $expendFrom;
 
         DB::beginTransaction();
-
-        // 获取用户信息
-        $user = User::find($userId);
-        if (empty($user)) {
-            throw new AssetException('操作资产时检查到用户不存在');
-        }
 
         // 获取用户资产
         $this->userAsset = UserAsset::where('user_id', $this->userId)->lockForUpdate()->first();
