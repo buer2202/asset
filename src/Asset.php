@@ -47,26 +47,33 @@ class Asset
      */
     public function __call($name, $arguments)
     {
+        $excption = config('asset.exception_class');
+
         if (isset($this->classes[$name])) {
-            $this->object = new $this->classes[$name](
-                $arguments[0],
-                $arguments[1],
-                $arguments[2],
-                $arguments[3],
-                $arguments[4],
-                $arguments[5] ?? 0,
-                $arguments[6] ?? null,
-                $arguments[7] ?? null
-            );
+            try {
+                $this->object = new $this->classes[$name](
+                    $arguments[0],
+                    $arguments[1],
+                    $arguments[2],
+                    $arguments[3],
+                    $arguments[4],
+                    $arguments[5] ?? 0,
+                    $arguments[6] ?? null,
+                    $arguments[7] ?? null
+                );
+            }
+            catch (AssetException $e) {
+                throw new $excption($e->getMessage());
+            }
         } elseif (in_array($name, $this->methods)) {
             if (empty($this->object)) {
-                throw new AssetException('进行资产操作后，才能获取资产信息');
+                throw new $excption('进行资产操作后，才能获取资产信息');
             }
 
             return $this->object->$name();
 
         } else {
-            throw new AssetException('不存在该资产方法');
+            throw new $excption('不存在该资产方法');
         }
 
         return true;

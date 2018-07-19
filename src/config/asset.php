@@ -23,4 +23,7 @@ return [
         71 => '支出',
         81 => '收入',
     ],
+
+    // 异常类，可自定义
+    'exception_class' => \Buer\Asset\Exceptions\AssetException::class,
 ];
