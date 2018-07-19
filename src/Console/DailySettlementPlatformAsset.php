@@ -3,7 +3,7 @@
 namespace Buer\Asset\Console;
 
 use Illuminate\Console\Command;
-use Exception;
+use Buer\Asset\Exceptions\AssetException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Buer\Asset\Repositories\PlatformAssetDailyRepository;
@@ -55,7 +55,7 @@ class DailySettlementPlatformAsset extends Command
         try {
             $this->repository->generateDaily($dailyDate);
         }
-        catch (Exception $e) {
+        catch (AssetException $e) {
             Log::warning('平台资产日结：' . $e->getMessage());
         }
     }

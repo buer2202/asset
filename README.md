@@ -69,6 +69,7 @@ Asset::refund(金额, 子类型, '订单号', '备注', 用户ID, 管理员ID, �
 Asset::expend(金额, 子类型, '订单号', '备注', 用户ID, 管理员ID, 关联模型对象); // 从余额支出
 Asset::expend(金额, 子类型, '订单号', '备注', 用户ID, 管理员ID, 关联模型对象, 'frozen'); // 从冻结支出
 Asset::income(金额, 子类型, '订单号', '备注', 用户ID, 管理员ID, 关联模型对象); // 收入
+Asset::transfer('金额', 子类型, '订单号', '备注', '转出用户ID', '转入用户ID', '管理员ID', '关联模型对象'); // 转账
 ```
 传关联模型对象参数时，需要在模型中使用此trait
 ```
@@ -103,4 +104,4 @@ php artisan daily-settlement:platform-asset 20180620
 字段都在数据库中。
 
 ## 异常
-若异常会抛出Exception，请自行捕获。
+若异常会抛出AssetException，请自行捕获。

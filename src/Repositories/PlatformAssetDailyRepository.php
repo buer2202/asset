@@ -1,7 +1,7 @@
 <?php
 namespace Buer\Asset\Repositories;
 
-use Exception;
+use Buer\Asset\Exceptions\AssetException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Buer\Asset\Models\PlatformAmountFlow;
@@ -22,7 +22,7 @@ class PlatformAssetDailyRepository
         // 判断数据是否存在
         $data = PlatformAssetDaily::find($date);
         if(!empty($data)) {
-            throw new Exception('已做过平台资产日结');
+            throw new AssetException('已做过平台资产日结');
         }
 
         // 取平台资金当日最后一笔流水
@@ -61,7 +61,7 @@ class PlatformAssetDailyRepository
         $platformAssetDaily->total_trade_amount   = $thatDayLastFlow->total_trade_amount ?? 0;
 
         if (!$platformAssetDaily->save()) {
-            throw new Exception('日结记录保存失败');
+            throw new AssetException('日结记录保存失败');
         }
 
         return true;

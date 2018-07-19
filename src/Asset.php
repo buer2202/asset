@@ -1,7 +1,6 @@
 <?php
 namespace Buer\Asset;
 
-use Exception;
 use Buer\Asset\Exceptions\AssetException;
 
 // 资产
@@ -19,6 +18,7 @@ class Asset
         'refund'   => Methods\Refund::class,   // 退款
         'expend'   => Methods\Expend::class,   // 支出
         'income'   => Methods\Income::class,   // 收入
+        'transfer' => Methods\Transfer::class, // 转账
     ];
 
     // 魔术方法允许的方法-资产查询
@@ -48,31 +48,25 @@ class Asset
     public function __call($name, $arguments)
     {
         if (isset($this->classes[$name])) {
-            try {
-                $this->object = new $this->classes[$name](
-                    $arguments[0],
-                    $arguments[1],
-                    $arguments[2],
-                    $arguments[3],
-                    $arguments[4],
-                    $arguments[5] ?? 0,
-                    $arguments[6] ?? null,
-                    $arguments[7] ?? null
-                );
-            }
-            catch (AssetException $e) {
-                throw new Exception($e->getMessage());
-            }
-
+            $this->object = new $this->classes[$name](
+                $arguments[0],
+                $arguments[1],
+                $arguments[2],
+                $arguments[3],
+                $arguments[4],
+                $arguments[5] ?? 0,
+                $arguments[6] ?? null,
+                $arguments[7] ?? null
+            );
         } elseif (in_array($name, $this->methods)) {
             if (empty($this->object)) {
-                throw new Exception('进行资产操作后，才能获取资产信息');
+                throw new AssetException('进行资产操作后，才能获取资产信息');
             }
 
             return $this->object->$name();
 
         } else {
-            throw new Exception('不存在该资产方法');
+            throw new AssetException('不存在该资产方法');
         }
 
         return true;
