@@ -1,5 +1,5 @@
 ## Laravel Asset 1.1
-用户资金管理系统，需要有users表。
+用户资金管理系统
 
 ## 框架要求
 Laravel >= 5.1
