@@ -78,21 +78,6 @@ class UserAssetDailyRepository
         $userAssetDaily->income         = $thatDayAggregate[8]['amount'] ?? 0;
         $userAssetDaily->total_income   = $thatDayLastFlow->total_income ?? 0;
 
-        // 如果没有交易则不做日结
-        if (
-            $userAssetDaily->recharge
-            + $userAssetDaily->withdraw
-            + $userAssetDaily->consume
-            + $userAssetDaily->refund
-            + $userAssetDaily->expend
-            + $userAssetDaily->income
-            + ($thatDayAggregate[3]['amount'] ?? 0)
-            + abs($thatDayAggregate[4]['amount'] ?? 0)
-            == 0
-        ) {
-            return true;
-        }
-
         if (!$userAssetDaily->save()) {
             $this->_unsettlementedUserIds[] = $userId;
             return false;
@@ -112,7 +97,7 @@ class UserAssetDailyRepository
         $end = Carbon::parse($dateEnd);
 
         while($start->lte($end)) {
-            $this->generateDaily($start->toDateString());
+            $this->generateAllUserDaily($start->toDateString());
             $start->addDay();
         }
 
