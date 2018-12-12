@@ -17,8 +17,8 @@ class CreatePlatformAmountFlowsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->comment('users.id');
             $table->unsignedInteger('admin_user_id')->comment('admin_users.id');
-            $table->unsignedTinyInteger('trade_type')->comment('交易类型:  1.用户加款 2.用户提现 3.用户冻结 4.用户解冻 5.用户消费 6.退款给用户 7.用户支出 8.用户收入');
-            $table->unsignedTinyInteger('trade_subtype')->comment('交易子类型: 11.自动加款 12.手动加款 21.手动提现 31.提现冻结 32.抢单冻结 41.提现解冻 42.抢单解冻 51.消费手续费 61.手续费退款 71.订单集市支出 81.订单集市收入');
+            $table->integer('trade_type')->comment('交易类型:  1.用户加款 2.用户提现 3.用户冻结 4.用户解冻 5.用户消费 6.退款给用户 7.用户支出 8.用户收入');
+            $table->integer('trade_subtype')->comment('交易子类型: 11.自动加款 12.手动加款 21.手动提现 31.提现冻结 32.抢单冻结 41.提现解冻 42.抢单解冻 51.消费手续费 61.手续费退款 71.订单集市支出 81.订单集市收入');
             $table->string('trade_no', 30)->default('')->comment('相关单号');
             $table->decimal('fee', 17, 4)->default(0)->comment('金额');
             $table->string('remark')->default('')->comment('备注说明');
