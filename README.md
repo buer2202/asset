@@ -104,4 +104,4 @@ php artisan daily-settlement:platform-asset 20180620
 字段都在数据库中。
 
 ## 异常
-若异常会抛出AssetException，请自行捕获。
+异常默认会抛出AssetException，可以在配置asset.php中自定义exception_class为你的异常类。

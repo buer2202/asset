@@ -47,7 +47,7 @@ class Asset
      */
     public function __call($name, $arguments)
     {
-        $excption = config('asset.exception_class');
+        $exception = config('asset.exception_class');
 
         if (isset($this->classes[$name])) {
             try {
@@ -63,17 +63,17 @@ class Asset
                 );
             }
             catch (AssetException $e) {
-                throw new $excption($e->getMessage());
+                throw new $exception($e->getMessage());
             }
         } elseif (in_array($name, $this->methods)) {
             if (empty($this->object)) {
-                throw new $excption('进行资产操作后，才能获取资产信息');
+                throw new $exception('进行资产操作后，才能获取资产信息');
             }
 
             return $this->object->$name();
 
         } else {
-            throw new $excption('不存在该资产方法');
+            throw new $exception('不存在该资产方法');
         }
 
         return true;
