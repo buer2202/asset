@@ -16,7 +16,7 @@ class CreateProcessOrdersTable extends Migration
         // 进行中的订单
         Schema::create('process_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('order_no', 30)->comment('订单号');
+            $table->string('order_no')->comment('订单号');
             $table->decimal('amount', 11, 4)->comment('金额');
             $table->unsignedInteger('user_id')->comment('用户id');
             $table->string('orderable_type', 150)->default('')->comment('多态关联模型名');

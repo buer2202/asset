@@ -19,7 +19,7 @@ class CreateUserAmountFlowsTable extends Migration
             $table->unsignedInteger('admin_user_id')->comment('admin_users.id');
             $table->integer('trade_type')->comment('交易类型: 1.加款 2.提现 3.冻结 4.解冻 5.消费 6.退款 7.支出 8.收入');
             $table->integer('trade_subtype')->comment('交易子类型: 11.自动加款 12.手动加款 21.手动提现 31.提现冻结 32.抢单冻结 41.提现解冻 42.抢单解冻 51.消费手续费 61.手续费退款 71.订单集市支出 81.订单集市收入');
-            $table->string('trade_no', 30)->default('')->comment('相关单号');
+            $table->string('trade_no')->default('')->comment('相关单号');
             $table->decimal('fee', 17, 4)->default(0)->comment('金额');
             $table->string('remark')->default('')->comment('备注说明');
             $table->decimal('balance', 17, 4)->comment('剩余金额');
