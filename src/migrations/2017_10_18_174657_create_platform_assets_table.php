@@ -25,8 +25,8 @@ class CreatePlatformAssetsTable extends Migration
             $table->decimal('total_refund', 17, 4)->default(0)->comment('累计退款给用户');
             $table->unsignedInteger('total_trade_quantity')->default(0)->comment('累计用户成交次数');
             $table->decimal('total_trade_amount', 17, 4)->default(0)->comment('累计用户成交金额');
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
+            $table->dateTime('created_at')->nullable()->default(null);
+            $table->dateTime('updated_at')->nullable()->default(null);
 
             $table->engine = 'InnoDB';
         });
