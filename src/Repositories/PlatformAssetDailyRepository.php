@@ -17,7 +17,7 @@ class PlatformAssetDailyRepository
     {
         $carbonObj = Carbon::parse($date);
         $timeStart = $carbonObj->toDateTimeString();
-        $timeEnd   = $carbonObj->addSeconds(86399)->toDateTimeString(); // 当日23:59:59
+        $timeEnd   = $carbonObj->endOfDay()->toDateTimeString(); // 当日23:59:59
 
         // 判断数据是否存在
         $data = PlatformAssetDaily::find($date);
@@ -25,8 +25,8 @@ class PlatformAssetDailyRepository
             throw new AssetException('已做过平台资产日结');
         }
 
-        // 取平台资金当日最后一笔流水
-        $thatDayLastFlow = PlatformAmountFlow::where('created_at', '<=', $timeEnd)->orderBy('created_at', 'desc')->first();
+        // 取平台资金最后一笔流水
+        $thatDayLastFlow = PlatformAmountFlow::where('created_at', '<=', $timeEnd)->orderBy('id', 'desc')->first();
 
         // 取平台资金当日统计
         $thatDayAggregate = PlatformAmountFlow::whereBetween('created_at', [$timeStart, $timeEnd])
