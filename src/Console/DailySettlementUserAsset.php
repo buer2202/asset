@@ -47,12 +47,10 @@ class DailySettlementUserAsset extends Command
     {
         $date = $this->argument('date');
         if ($date == 'yesterday') {
-            $dailyDate = Carbon::yesterday()->toDateString();
-        } else {
-            $dailyDate = $date;
+            $date = Carbon::yesterday()->toDateString();
         }
 
-        $result = $this->repository->generateAllUserDaily($dailyDate);
+        $result = $this->repository->generateAllUserDaily($date);
 
         if (!$result) {
             Log::warning('用户资产日结，重复做日结的用户', $this->repository->getSettlementedUserIds());

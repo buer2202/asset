@@ -47,13 +47,11 @@ class DailySettlementPlatformAsset extends Command
     {
         $date = $this->argument('date');
         if ($date == 'yesterday') {
-            $dailyDate = Carbon::yesterday()->toDateString();
-        } else {
-            $dailyDate = $date;
+            $date = Carbon::yesterday()->toDateString();
         }
 
         try {
-            $this->repository->generateDaily($dailyDate);
+            $this->repository->generateDaily($date);
         }
         catch (AssetException $e) {
             Log::warning('平台资产日结：' . $e->getMessage());
