@@ -13,7 +13,7 @@ class UserAmountFlow extends Model
      */
     public $timestamps = false;
 
-    public function tradeOrder()
+    public function flowable()
     {
         return $this->morphTo();
     }
