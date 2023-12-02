@@ -14,7 +14,7 @@ class CreatePlatformAmountFlowsTable extends Migration
     public function up()
     {
         Schema::create('platform_amount_flows', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->comment('users.id');
             $table->unsignedInteger('admin_user_id')->comment('admin_users.id');
             $table->integer('trade_type')->comment('交易类型:  1.用户加款 2.用户提现 3.用户冻结 4.用户解冻 5.用户消费 6.退款给用户 7.用户支出 8.用户收入');

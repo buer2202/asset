@@ -14,7 +14,7 @@ class CreateUserAssetDailiesTable extends Migration
     public function up()
     {
         Schema::create('user_asset_dailies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->date('date')->comment('结算日期');
             $table->unsignedInteger('user_id')->comment('用户id：users.id');
             $table->decimal('balance', 17, 4)->comment('剩余金额');

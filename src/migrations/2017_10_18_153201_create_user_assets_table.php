@@ -14,7 +14,7 @@ class CreateUserAssetsTable extends Migration
     public function up()
     {
         Schema::create('user_assets', function (Blueprint $table) {
-            $table->unsignedInteger('user_id')->comment('users.id');
+            $table->unsignedBigInteger('user_id')->comment('users.id');
             $table->decimal('balance', 17, 4)->default(0)->comment('剩余金额');
             $table->decimal('frozen', 17, 4)->default(0)->comment('冻结金额');
             $table->decimal('total_recharge', 17, 4)->default(0)->comment('累计平台加款');

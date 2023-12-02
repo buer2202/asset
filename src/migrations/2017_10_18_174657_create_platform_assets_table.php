@@ -14,7 +14,7 @@ class CreatePlatformAssetsTable extends Migration
     public function up()
     {
         Schema::create('platform_assets', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->decimal('amount', 17, 4)->default(0)->comment('平台资金（例如手续费之类的收入）');
             $table->decimal('managed', 17, 4)->default(0)->comment('平台托管资金（用户之间交易时，钱存在这里）');
             $table->decimal('balance', 17, 4)->default(0)->comment('用户剩余金额');
