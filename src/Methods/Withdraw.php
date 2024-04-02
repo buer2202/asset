@@ -17,12 +17,22 @@ class Withdraw extends TradeBase
     // 更新用户余额
     public function updateUserAsset()
     {
-        $afterFrozen = bcadd($this->userAsset->frozen, $this->fee);
-        if ($afterFrozen < 0) {
-            throw new AssetException('用户冻结金额不足');
+        if ($this->expendFrom == 'balance') {
+            $afterBalance = bcadd($this->userAsset->balance, $this->fee);
+            if ($afterBalance < 0) {
+                throw new AssetException('用户剩余金额不足');
+            }
+
+            $this->userAsset->balance = $afterBalance;
+        } else {
+            $afterFrozen = bcadd($this->userAsset->frozen, $this->fee);
+            if ($afterFrozen < 0) {
+                throw new AssetException('用户冻结金额不足');
+            }
+
+            $this->userAsset->frozen = $afterFrozen;
         }
 
-        $this->userAsset->frozen         = $afterFrozen;
         $this->userAsset->total_withdraw = bcadd($this->userAsset->total_withdraw, abs($this->fee));
 
         if (!$this->userAsset->save()) {
@@ -35,12 +45,22 @@ class Withdraw extends TradeBase
     // 更新平台资金
     public function updatePlatformAsset()
     {
-        $afterFrozen = bcadd($this->platformAsset->frozen, $this->fee);
-        if ($afterFrozen < 0) {
-            throw new AssetException('平台冻结金额不足');
+        if ($this->expendFrom == 'balance') {
+            $afterBalance = bcadd($this->platformAsset->balance, $this->fee);
+            if ($afterBalance < 0) {
+                throw new AssetException('平台剩余金额不足');
+            }
+
+            $this->platformAsset->balance = $afterBalance;
+        } else {
+            $afterFrozen = bcadd($this->platformAsset->frozen, $this->fee);
+            if ($afterFrozen < 0) {
+                throw new AssetException('平台冻结金额不足');
+            }
+
+            $this->platformAsset->frozen = $afterFrozen;
         }
 
-        $this->platformAsset->frozen         = $afterFrozen;
         $this->platformAsset->total_withdraw = bcadd($this->platformAsset->total_withdraw, abs($this->fee));
 
         if (!$this->platformAsset->save()) {
