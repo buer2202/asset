@@ -20,14 +20,14 @@ class Withdraw extends TradeBase
         if ($this->expendFrom == 'balance') {
             $afterBalance = bcadd($this->userAsset->balance, $this->fee);
             if ($afterBalance < 0) {
-                throw new AssetException('用户剩余金额不足');
+                throw new AssetException("The user's remaining balance is insufficient");
             }
 
             $this->userAsset->balance = $afterBalance;
         } else {
             $afterFrozen = bcadd($this->userAsset->frozen, $this->fee);
             if ($afterFrozen < 0) {
-                throw new AssetException('用户冻结金额不足');
+                throw new AssetException("The user's frozen amount is insufficient");
             }
 
             $this->userAsset->frozen = $afterFrozen;
@@ -36,7 +36,7 @@ class Withdraw extends TradeBase
         $this->userAsset->total_withdraw = bcadd($this->userAsset->total_withdraw, abs($this->fee));
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -48,14 +48,14 @@ class Withdraw extends TradeBase
         if ($this->expendFrom == 'balance') {
             $afterBalance = bcadd($this->platformAsset->balance, $this->fee);
             if ($afterBalance < 0) {
-                throw new AssetException('平台剩余金额不足');
+                throw new AssetException("The platform's remaining balance is insufficient");
             }
 
             $this->platformAsset->balance = $afterBalance;
         } else {
             $afterFrozen = bcadd($this->platformAsset->frozen, $this->fee);
             if ($afterFrozen < 0) {
-                throw new AssetException('平台冻结金额不足');
+                throw new AssetException("The platform's frozen amount is insufficient");
             }
 
             $this->platformAsset->frozen = $afterFrozen;
@@ -64,7 +64,7 @@ class Withdraw extends TradeBase
         $this->platformAsset->total_withdraw = bcadd($this->platformAsset->total_withdraw, abs($this->fee));
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

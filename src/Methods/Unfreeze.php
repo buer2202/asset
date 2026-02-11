@@ -19,14 +19,14 @@ class Unfreeze extends TradeBase
     {
         $afterFrozen = bcsub($this->userAsset->frozen, $this->fee);
         if ($afterFrozen < 0) {
-            throw new AssetException('用户冻结金额不足');
+            throw new AssetException("The user's frozen amount is insufficient");
         }
 
         $this->userAsset->balance = bcadd($this->userAsset->balance, $this->fee);
         $this->userAsset->frozen  = $afterFrozen;
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -37,14 +37,14 @@ class Unfreeze extends TradeBase
     {
         $afterFrozen = bcsub($this->platformAsset->frozen, $this->fee);
         if ($afterFrozen < 0) {
-            throw new AssetException('平台冻结金额不足');
+            throw new AssetException("The platform's frozen amount is insufficient");
         }
 
         $this->platformAsset->balance = bcadd($this->platformAsset->balance, $this->fee);
         $this->platformAsset->frozen  = $afterFrozen;
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

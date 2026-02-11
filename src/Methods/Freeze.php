@@ -19,14 +19,14 @@ class Freeze extends TradeBase
     {
         $afterBalance = bcadd($this->userAsset->balance, $this->fee);
         if ($afterBalance < 0) {
-            throw new AssetException('用户余额不足');
+            throw new AssetException("The user's remaining balance is insufficient");
         }
 
         $this->userAsset->balance = $afterBalance;
         $this->userAsset->frozen  = bcadd($this->userAsset->frozen, abs($this->fee));
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -37,14 +37,14 @@ class Freeze extends TradeBase
     {
         $afterBalance = bcadd($this->platformAsset->balance, $this->fee);
         if ($afterBalance < 0) {
-            throw new AssetException('平台余额不足');
+            throw new AssetException("The platform's remaining balance is insufficient");
         }
 
         $this->platformAsset->balance = $afterBalance;
         $this->platformAsset->frozen  = bcadd($this->platformAsset->frozen, abs($this->fee));
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

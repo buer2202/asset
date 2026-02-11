@@ -17,17 +17,17 @@ class Income extends TradeBase
         // 维护处理中的订单表
         $processOrder = ProcessOrder::where('order_no', $this->tradeNo)->lockForUpdate()->first();
         if (empty($processOrder)) {
-            throw new AssetException('不存在该处理中的订单');
+            throw new AssetException("There is no processing order");
         }
 
         $processOrder->amount = bcadd($processOrder->amount, $this->fee);
         if ($processOrder->amount > 0) {
-            throw new AssetException('订单额度不足');
+            throw new AssetException("The order amount is insufficient");
         } elseif ($processOrder->amount == 0) {
             $processOrder->delete(); // 删掉
         } else {
             if (!$processOrder->save()) {
-                throw new AssetException('维护处理中的订单失败');
+                throw new AssetException("Failed to update the processing order");
             }
         }
     }
@@ -39,7 +39,7 @@ class Income extends TradeBase
         $this->userAsset->total_income = bcadd($this->userAsset->total_income, $this->fee);
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -55,7 +55,7 @@ class Income extends TradeBase
     {
         $afterManaged = bcadd($this->platformAsset->managed, $this->fee);
         if ($afterManaged < 0) {
-            throw new AssetException('平台资金不足');
+            throw new AssetException("The platform's managed amount is insufficient");
         }
 
         $this->platformAsset->managed              = $afterManaged;
@@ -64,7 +64,7 @@ class Income extends TradeBase
         $this->platformAsset->total_trade_amount   = bcadd($this->platformAsset->total_trade_amount, abs($this->fee));
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

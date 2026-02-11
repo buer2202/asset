@@ -44,14 +44,14 @@ class Expend extends TradeBase
         if ($this->expendFrom == 'frozen') {
             $afterFrozen = bcadd($this->userAsset->frozen, $this->fee);
             if ($afterFrozen < 0) {
-                throw new AssetException('用户冻结金额不足');
+                throw new AssetException("The user's frozen amount is insufficient");
             }
 
             $this->userAsset->frozen = $afterFrozen;
         } else {
             $afterBalance = bcadd($this->userAsset->balance, $this->fee);
             if ($afterBalance < 0) {
-                throw new AssetException('用户剩余金额不足');
+                throw new AssetException("The user's remaining balance is insufficient");
             }
 
             $this->userAsset->balance = $afterBalance;
@@ -60,7 +60,7 @@ class Expend extends TradeBase
         $this->userAsset->total_expend = bcadd($this->userAsset->total_expend, abs($this->fee));
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -77,14 +77,14 @@ class Expend extends TradeBase
         if ($this->expendFrom == 'frozen') {
             $afterFrozen = bcsub($this->platformAsset->frozen, $this->fee);
             if ($afterFrozen < 0) {
-                throw new AssetException('平台冻结金额不足');
+                throw new AssetException("The platform's frozen amount is insufficient");
             }
 
             $this->platformAsset->frozen = $afterFrozen;
         } else {
             $afterBalance = bcsub($this->platformAsset->balance, $this->fee);
             if ($afterBalance < 0) {
-                throw new AssetException('平台剩余金额不足');
+                throw new AssetException("The platform's remaining balance is insufficient");
             }
 
             $this->platformAsset->balance = $afterBalance;
@@ -93,7 +93,7 @@ class Expend extends TradeBase
         $this->platformAsset->managed = bcadd($this->platformAsset->managed, $this->fee);
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

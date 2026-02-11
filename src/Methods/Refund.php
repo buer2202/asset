@@ -21,7 +21,7 @@ class Refund extends TradeBase
         $this->userAsset->total_refund = bcadd($this->userAsset->total_refund, $this->fee);
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -37,7 +37,7 @@ class Refund extends TradeBase
     {
         $afterAmount = bcadd($this->platformAsset->amount, $this->fee);
         if ($afterAmount < 0) {
-            throw new AssetException('平台资金不足');
+            throw new AssetException("The platform's managed amount is insufficient");
         }
 
         $this->platformAsset->amount       = $afterAmount;
@@ -45,7 +45,7 @@ class Refund extends TradeBase
         $this->platformAsset->total_refund = bcadd($this->platformAsset->total_refund, abs($this->fee));
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;

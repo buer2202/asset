@@ -21,7 +21,7 @@ class Recharge extends TradeBase
         $this->userAsset->total_recharge = bcadd($this->userAsset->total_recharge, $this->fee);
 
         if (!$this->userAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the user's asset");
         }
 
         return true;
@@ -34,7 +34,7 @@ class Recharge extends TradeBase
         $this->platformAsset->total_recharge = bcadd($this->platformAsset->total_recharge, $this->fee);
 
         if (!$this->platformAsset->save()) {
-            throw new AssetException('数据更新失败');
+            throw new AssetException("Failed to update the platform's asset");
         }
 
         return true;
