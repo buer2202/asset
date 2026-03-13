@@ -48,12 +48,12 @@ abstract class TradeBase
     public function __construct($fee, $subtype, $tradeNo, $remark, $userId, $adminUserId = 0, $tradeModel = null, $expendFrom = null)
     {
         if ($fee > -0.0001 && $fee < 0.0001) {
-            throw new AssetException('金额范围不正确');
+            throw new AssetException('The amount range is incorrect');
         }
 
         // 判断是否存在科学计数法
         if (strpos(strtolower($fee), 'e')) {
-            throw new AssetException('金额精度不正确');
+            throw new AssetException('The accuracy of the amount is incorrect');
         }
 
         if (!empty($tradeModel) && !($tradeModel instanceof Model)) {
