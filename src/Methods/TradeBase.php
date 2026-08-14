@@ -4,6 +4,7 @@ namespace Buer\Asset\Methods;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Buer\Asset\Exceptions\AssetException;
+use Buer\Asset\Events\AssetTradeCompletedEvent;
 use Buer\Asset\Models\UserAmountFlow;
 use Buer\Asset\Models\PlatformAmountFlow;
 use Buer\Asset\Models\PlatformAsset;
@@ -98,8 +99,10 @@ abstract class TradeBase
         $this->updatePlatformAsset();
         $this->createPlatformAmountFlow();
 
+        // 触发交易完成事件
+        event(new AssetTradeCompletedEvent($this->platformAmountFlow, $this->userAmountFlow));
+
         DB::commit();
-        return true;
     }
 
     // 用户前置操作
